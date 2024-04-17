@@ -1,0 +1,48 @@
+﻿@page "/orders"
+@attribute [Authorize(Roles = BlazorShared.Authorization.Constants.Roles.ADMINISTRATORS)]
+@inherits BlazorAdmin.Helpers.BlazorComponent
+@namespace BlazorAdmin.Pages.OrderPage
+
+<PageTitle>eShopOnWeb Admin: Manage Orders</PageTitle>
+
+<h1>Manage Orders</h1>
+
+@if (orders == null)
+{
+    <Spinner></Spinner>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Shipment Date</th>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>State</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="cursor-pointer">
+            @foreach (var item in orders)
+            {
+                    <tr>
+                    <td>@item.OrderDate.LocalDateTime</td>
+                    <td>@item.BuyerId</td>
+                    <td>@item.Total</td>
+                    <td>@item.Status</td>
+                
+                    <td>
+                        <button @onclick="@(() => OrderDetailsClick(item.Id))" @onclick:stopPropagation="true" class="btn btn-primary">
+                            Detail
+                        </button>
+                  
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <Details OnStatusApproveClick="ReloadOrders" @ref="OrderDetailsComponent"></Details>
+}
