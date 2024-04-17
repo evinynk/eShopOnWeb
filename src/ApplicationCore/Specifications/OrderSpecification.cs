@@ -11,6 +11,8 @@ public class OrderSpecification : Specification<Order>
 {
     public OrderSpecification()
     {
-        Query.Include(o => o.OrderItems);
+        Query
+       .Include(o => o.OrderItems)
+       .ThenInclude(i => i.ItemOrdered);
     }
 }

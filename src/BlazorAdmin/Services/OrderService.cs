@@ -10,9 +10,9 @@ namespace BlazorAdmin.Services;
 public class OrderService : IOrderService
 {
     private readonly HttpService _httpService;
-    private readonly ILogger<CatalogItemService> _logger;
+    private readonly ILogger<OrderService> _logger;
     public OrderService(HttpService httpService,
-        ILogger<CatalogItemService> logger)
+        ILogger<OrderService> logger)
     {       
         _httpService = httpService;
         _logger = logger;
